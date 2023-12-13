@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buy_details', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('buy_id');
 
-            $table->decimal('price', $precision = 8, $scale = 2);//precio
-            $table->decimal('amount', $precision = 8, $scale = 2);//cantidad
-            $table->string('lot_buys', 50);//lote de compra
+            $table->string('name',255);
+            $table->string('description',255)->nullable();
+            $table->string('category',255); 
+            $table->enum('status',['activo', 'inactivo'])->default('activo');
 
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buy_details');
+        Schema::dropIfExists('categories');
     }
 };

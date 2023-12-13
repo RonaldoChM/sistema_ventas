@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('location_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('location_id');
+
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('location_id')->constrained();
 
             $table->string('description', 255);
 
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('location_id')->references('id')->on('locations');
             $table->timestamps();
         });
     }

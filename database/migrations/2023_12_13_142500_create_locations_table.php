@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('branch_id');
             $table->string('cod', 50);
             $table->string('description', 255)->nullable();
             $table->string('type', 255);
             $table->enum('status', ['vitrina','estantes','mostrador', 'otro']);
 
-            $table->foreign('branch_id')->references('id')->on('categories');
-
+            $table->foreignId('office_id')->constrained();         
+            
             $table->timestamps();
         });
     }

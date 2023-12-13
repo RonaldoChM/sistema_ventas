@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('buys', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            
             $table->decimal('amount_total', $precision = 8, $scale = 2);//importe total
             $table->decimal('discount', $precision = 8, $scale = 2);//descuento
             $table->date('purchase_date');//fecha compra
@@ -27,7 +27,8 @@ return new class extends Migration
             $table->enum('status', ['activo', 'inactivo', 'p']);//estado
             $table->string('image', 2048)->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained();
+            
 
             $table->timestamps();
         });

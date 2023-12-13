@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('branch_users', function (Blueprint $table) {
+        Schema::create('office_users', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('branch_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('office_id')->constrained();
 
             $table->enum('status', ['activo', 'finalizado']);
             $table->date('final_date');
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('branch_id')->references('id')->on('branches');
 
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('branch_users');
+        Schema::dropIfExists('office_users');
     }
 };

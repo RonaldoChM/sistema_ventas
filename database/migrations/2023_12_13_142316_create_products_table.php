@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('industry', 255);
             $table->enum('status', ['activo', 'inactivo'])->default('activo');
             $table->string('image', 2048)->nullable();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on ('categories');
+
+            $table->foreignId('category_id')->constrained();
 
             $table->timestamps();
         });

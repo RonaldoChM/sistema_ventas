@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('motion_products', function (Blueprint $table) {
+        Schema::create('location_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('location_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('location_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->enum('type', ['entrada', 'salida']);
             $table->enum('adjustment', ['si', 'no']);
             $table->string('observation', 255)->nullable();
             $table->enum('status', ['aceptado', 'rechazado']);
-
-            $table->foreign('location_id')->references('id')->on('locations');
-            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('motion_products');
+        Schema::dropIfExists('location_users');
     }
 };

@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('offices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
             $table->string('name', 255);
             $table->string('address', 255);
             $table->string('phone', 10)->nullable();
             $table->string('cell_phone',10);
-            $table->enum('status', ['activo', 'inactivo']);
-
-            $table->foreign('company_id')->references('id')->on ('companies');
-
+            $table->foreignId('company_id')->constrained();
             $table->timestamps();
+
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('offices');
     }
 };

@@ -58,4 +58,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function office_users()
+    {
+        return $this->hasMany(Office_user::class);
+        
+    }
+
+    public function location_users()
+    {
+        return $this->hasMany(Location_user::class);
+        
+    }
+
+    public function buys()
+    {
+        return $this->hasMany(Buy::class);
+        
+    }
 }
